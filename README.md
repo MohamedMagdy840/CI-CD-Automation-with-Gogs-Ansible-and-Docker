@@ -60,6 +60,8 @@ This project aims to automate CI/CD processes using Jenkins for pipeline orchest
 [Jenkins](https://www.jenkins.io/) on VM1 automates the CI/CD pipeline. The Jenkinsfile defines pipeline stages:
 
 # Environment Variables
+
+'''groovy
 environment {
     IMAGE_NAME = "apache-image"
     TAR_FILE = "${IMAGE_NAME}.tar"
