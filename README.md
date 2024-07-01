@@ -17,7 +17,7 @@ This project aims to automate CI/CD processes using Jenkins for pipeline orchest
    - **Username:** VM2
 
 3. **VM3: Apache Server**
-   - **IP Address:** 192.168.44.10
+   - **IP Address:** 192.168.44.30
    - **Port:** 8080
    - **Username:** apache
 
