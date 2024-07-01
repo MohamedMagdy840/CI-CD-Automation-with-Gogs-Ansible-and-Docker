@@ -83,12 +83,12 @@ inventory = ./inventory
 become = true
 
 ## Ansible Inventory File (`inventory`)
-```ini
+```yaml
 [apache_hosts]
 192.168.44.30
 
 ## Ansible-playbook File (`InstallApache.yml`) to install Apache in VM3
-```ini
+```yaml
 - name: Install Apache on VM3
   hosts: apache_hosts
   gather_facts: no
