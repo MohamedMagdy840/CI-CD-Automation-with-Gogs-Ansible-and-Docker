@@ -2,26 +2,26 @@
 
 # Function takes a parameter with the username and returns 0 if the requested user is the same as the current user.
 # Otherwise, it returns 1.
-function checkUser {
-    RUSER=${1}
-    [ ${RUSER} == ${USER} ] && return 0
+function checkUsers {
+    CHECKUSER=${1}
+    [ ${CHECKUSER} == ${USER} ] && return 0
     return 1 
 }
 
 # Function takes a parameter with the username and returns 0 if the user does not exist.
 # Otherwise, it returns 1.
-function userExist {
-    NUSER=${1}
-    cat /etc/passwd | grep -w ${NUSER} > /dev/null 2>&1
+function  checkUserExist {
+    EXISTUSER=${1}
+    cat /etc/passwd | grep -w ${ExistUSER} > /dev/null 2>&1
     [ ${?} -ne 0 ] && return 0
     return 1
 }
 
 # Function takes a parameter with the group name and returns 0 if the group does not exist.
 # Otherwise, it returns 1.
-function groupExist {
-    NGRP=${1}
-    cat /etc/group | grep -w ${NGRP} > /dev/null 2>&1
+function  checkGroupExist {
+    CHECKGROUP=${1}
+    cat /etc/group | grep -w ${CHECKGROUP} > /dev/null 2>&1
     [ ${?} -ne 0 ] && return 0
     return 1
 }
@@ -34,7 +34,7 @@ function groupExist {
 #    3: Group already exists
 
 # Check if the script is executed with root privileges
-checkUser "root"
+checkUsers "root"
 if [ $? -ne 0 ]; then
   echo "Script must be executed with sudo privileges"
   exit 1
@@ -49,7 +49,7 @@ created_group=""
 
 # Check and create users if they do not exist
 for user in "${users[@]}"; do
-  userExist "$user"
+  checkUserExist "$user"
   if [ $? -eq 0 ]; then
     echo "User '$user' already exists"
   else
@@ -60,7 +60,7 @@ for user in "${users[@]}"; do
 done
 
 # Check and create the group "deployG" if it does not exist
-groupExist "deployG"
+checkGroupExist "deployG"
 if [ $? -eq 0 ]; then
   echo "Group 'deployG' already exists"
   created_group="deployG"
