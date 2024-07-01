@@ -88,7 +88,7 @@ environment {
    ```ini
    [apache_hosts]
     192.168.44.30
-   ```'
+   ```
 
 ## Ansible-playbook File (`InstallApache.yml`) to install Apache in VM3
  ### Ansible Playbook 
