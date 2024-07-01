@@ -1,5 +1,5 @@
 # Project: CI/CD Automation with Jenkins, Gogs, Ansible, and Docker
-
+![Project Architecture](architecture.jpg)
 ## Project Overview
 
 This project aims to automate CI/CD processes using Jenkins for pipeline orchestration, Gogs for Git repository management, Ansible for configuration management, and Docker for containerization. The setup involves provisioning three VMs: VM1 for Jenkins, VM2 for Gogs, and VM3 for Apache server deployment.
