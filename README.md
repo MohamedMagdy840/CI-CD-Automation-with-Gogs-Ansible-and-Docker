@@ -69,27 +69,28 @@ environment {
     DEPLOYG_HOST = "192.168.44.30"
     APACHE_USER = "apache"  // Define your SSH user here
 }
-
+'''
 # Ansible Configuration
 
 [Ansible](https://www.ansible.com/) is used for automating deployment tasks on VM3.
 
 ## Ansible Configuration File (`ansible.cfg`)
-
+'''ini
 [defaults]
 remote_user = apache
 inventory = ./inventory
 
 [privilege_escalation]
 become = true
-
+'''
 ## Ansible Inventory File (`inventory`)
 '''ini
 [apache_hosts]
 192.168.44.30
+'''
 
 ## Ansible-playbook File (`InstallApache.yml`) to install Apache in VM3
-
+'''yaml
 - name: Install Apache on VM3
   hosts: apache_hosts
   gather_facts: no
@@ -115,3 +116,4 @@ become = true
     - name: Print Apache service status
       debug:
         msg: "Apache service is {{ 'enabled' if apache_enabled.rc == 0 else 'not enabled' }}"
+'''
