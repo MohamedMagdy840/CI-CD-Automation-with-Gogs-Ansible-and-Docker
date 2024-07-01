@@ -82,7 +82,7 @@ inventory = ./inventory
 become = true
 
 ## Ansible Inventory File (`inventory`)
-
+'''ini
 [apache_hosts]
 192.168.44.30
 
