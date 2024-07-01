@@ -75,45 +75,44 @@ environment {
 [Ansible](https://www.ansible.com/) is used for automating deployment tasks on VM3.
 
 ## Ansible Configuration File (`ansible.cfg`)
-'''ini
-[defaults]
-remote_user = apache
-inventory = ./inventory
+ ### Upade the ansible configuration file:
+   ```ini
+    [defaults]
+    remote_user = apache
+    inventory = ./inventory 
 
-[privilege_escalation]
-become = true
-'''
-## Ansible Inventory File (`inventory`)
-'''ini
-[apache_hosts]
-192.168.44.30
-'''
+    [privilege_escalation]
+    become = true
+  ```
+ ### Configure the inventory file:
+   ```ini
+   [apache_hosts]
+    192.168.44.30
+   ```'
 
 ## Ansible-playbook File (`InstallApache.yml`) to install Apache in VM3
-'''yaml
-- name: Install Apache on VM3
-  hosts: apache_hosts
-  gather_facts: no
+ ### Ansible Playbook 
+    - name: Install Apache on VM3
+    hosts: apache_hosts
+    gather_facts: no
 
+    tasks:
+        - name: Install Apache web server
+        package:
+            name: httpd  # Package name for Apache on CentOS
+            state: present  # Ensure the package is present
 
-  tasks:
-    - name: Install Apache web server
-      package:
-        name: httpd  # Package name for Apache on CentOS
-        state: present  # Ensure the package is present
+        - name: Start Apache service and enable it on boot
+        service:
+            name: httpd  # Service name for Apache on CentOS
+            state: started
+            enabled: yes
 
-    - name: Start Apache service and enable it on boot
-      service:
-        name: httpd  # Service name for Apache on CentOS
-        state: started
-        enabled: yes
+        - name: Check if Apache service is enabled
+        command: systemctl is-enabled httpd
+        register: apache_enabled
+        ignore_errors: true  # Ignore errors in case the service is not enabled
 
-    - name: Check if Apache service is enabled
-      command: systemctl is-enabled httpd
-      register: apache_enabled
-      ignore_errors: true  # Ignore errors in case the service is not enabled
-
-    - name: Print Apache service status
-      debug:
-        msg: "Apache service is {{ 'enabled' if apache_enabled.rc == 0 else 'not enabled' }}"
-'''
+        - name: Print Apache service status
+        debug:
+            msg: "Apache service is {{ 'enabled' if apache_enabled.rc == 0 else 'not enabled' }}"
