@@ -74,7 +74,6 @@ environment {
 
 ## Ansible Configuration File (`ansible.cfg`)
 
-```ini
 [defaults]
 remote_user = apache
 inventory = ./inventory
@@ -83,12 +82,12 @@ inventory = ./inventory
 become = true
 
 ## Ansible Inventory File (`inventory`)
-```yaml
+
 [apache_hosts]
 192.168.44.30
 
 ## Ansible-playbook File (`InstallApache.yml`) to install Apache in VM3
-```yaml
+
 - name: Install Apache on VM3
   hosts: apache_hosts
   gather_facts: no
