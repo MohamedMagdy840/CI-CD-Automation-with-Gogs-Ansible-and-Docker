@@ -1,34 +1,34 @@
 #!/bin/bash
 
 # Function to check if script is executed with root privileges
-function checkUser {
-    RUSER=${1}
-    [ ${RUSER} == ${USER} ] && return 0
+function checkUsers  {
+    CHECKUSER=${1}
+    [ ${CHECKUSER} == ${USER} ] && return 0
     return 1
 }
 
 # Function to check if group exists
-function groupExist {
-    NGRP=${1}
-    grep -q "^${NGRP}:" /etc/group
+function checkGroupExist  {
+    EXISTUSER=${1}
+    grep -q "^${EXISTUSER}:" /etc/group
     return $?
 }
 
-############# Fetch a list of users from the "webAdmins" group #############
+############# Fetch a list of users from the "deployG" group #############
 ## Exit codes:
-#       0: Success
+#   0: Success
 #   1: Script is executed with a user has no privileges
 #   2: Group does not exist
 
 # Check if script is executed with root privileges
-checkUser "root"
+checkUsers "root"
 if [ $? -ne 0 ]; then
     echo "Script must be executed with sudo privilege"
     exit 1
 fi
 
 # Check if the group "deployG" exists
-groupExist "deployG"
+checkGroupExist "deployG"
 if [ $? -ne 0 ]; then
     echo "Group 'deployG' does not exist"
     exit 2
